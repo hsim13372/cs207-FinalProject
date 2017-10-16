@@ -16,8 +16,8 @@ class Reaction():
                  reactant_stoich_coeffs, product_stoich_coeffs):
         """Initializes Reaction
     
-        INPUTS:
-        -------
+        INPUTS
+        ======
         rxn_type : str
             type of reaction (e.g. "Elementary")
         is_reversible : bool
@@ -34,8 +34,8 @@ class Reaction():
         product_stoich_coeffs : dict
             dictionary of integers for product stoichiometric coefficients
 
-        ATTRIBUTES:
-        -----------
+        ATTRIBUTES
+        ==========
         temperature : int or float
             temperature of reaction, in Kelvin
         concentrations : list
@@ -255,9 +255,6 @@ class IrreversibleReaction(Reaction):
         super().__init__(self, rxn_type, is_reversible, rxn_equation, rate_coeffs_components,
                  reactant_stoich_coeffs, product_stoich_coeffs)
 
-    def compute_reaction_rate(self):
-        raise NotImplementedError
-
 
 class ReversibleReaction(Reaction):
     """Class for reversible reaction
@@ -282,6 +279,11 @@ class ReactionCoeff():
             temperature of the reaction (in Kelvin)
         k_parameters : dictionary
             dictionary of parameters to compute k
+
+        EXAMPLES
+        ========
+        >>> ReactionCoeff({'k': 10}).k
+        10
         """
         self.k_parameters = k_parameters
         self.T = T
