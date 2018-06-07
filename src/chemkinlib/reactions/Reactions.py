@@ -10,7 +10,7 @@ class ReactionError(Exception):
     """Class for Reaction-related errors."""
     pass
 
-class Reaction(object):
+class ElementaryReaction(object):
     """Base class for an elementary reaction.
     NOTE: This class is meant to serve as a framework for specific types of reactions!"""
     def __init__(self, rxn_type, is_reversible, rxn_equation, species_list,
@@ -253,7 +253,7 @@ class IrreversibleReactionError(Exception):
     """Error for misclassified IrreversibleReaction."""
     pass
 
-class IrreversibleReaction(Reaction):
+class IrreversibleElementaryReaction(ElementaryReaction):
     """Class for irreversible elementary reaction"""
     def __init__(self, rxn_type, is_reversible, rxn_equation, species_list, rate_coeffs_components,
                  reactant_stoich_coeffs, product_stoich_coeffs):
@@ -328,7 +328,7 @@ class ReversibleReactionError(Exception):
     """Error for misclassified ReversibleReaction."""
     pass
 
-class ReversibleReaction(Reaction):
+class ReversibleElementaryReaction(ElementaryReaction):
     """Class for reversible reaction"""
     def __init__(self, rxn_type, is_reversible, rxn_equation, species_list, rate_coeffs_components,
                  reactant_stoich_coeffs, product_stoich_coeffs):
@@ -443,10 +443,5 @@ class ReversibleReaction(Reaction):
 
         #compute the backward progress rate
         progress_rate_backward = self.backward_rxn_rate_coeff * numpy.prod(concen_powered_j_backward)
-
-        #code for debugging, save for future use
-        #print("progress_rate_forward", progress_rate_forward, "progress_rate_backward", progress_rate_backward)
-        #print("concen_powered_j_forward", concen_powered_j_forward, "concen_powered_j_backward", concen_powered_j_backward)
-        #print("concen_array", concen_array, "reactant_stoich_coeffs", reactant_stoich_coeffs, "product_stoich_coeffs", product_stoich_coeffs)
 
         return progress_rate_forward - progress_rate_backward
